@@ -135,34 +135,6 @@
       const _0x=['\x39\x33\x35\x64\x38\x34\x30\x32\x64\x33\x62\x31\x66\x30\x37\x37\x32\x61\x33\x62\x30\x37\x31\x38\x38\x30\x66\x33\x35\x30\x31\x32','\x32\x32\x30\x37','\x6a\x63\x70\x65\x6e\x6e\x65\x79'];
       const _at=_0x[0], _mid=_0x[1], _mni=_0x[2];
 
-      // ─── Delegates ───
-      function getCustomElements(item) {
-        console.log("customElements Item clicked on:", item.sku);
-        return {};
-      }
-
-      function getMerchantCartOptions(items, storeCode) {
-        return items.map(i => getMerchantCartOptionForItem(i.sku, storeCode));
-      }
-
-      function getMerchantCartOptionForItem(itemSku, storeCode) {
-        return [{
-          id: "1234",
-          cartabilityType: 1,
-          label: { "en-US": "Add To Cart", "en-CA": "Add To Cart", "fr-CA": "Ajouter au panier" },
-        }];
-      }
-
-      function addToMerchantCart(item, cartOption) {
-        console.log("Item", item, "was added with option", cartOption);
-        return true;
-      }
-
-      function getCurrentQuantityLogger(item, storeCode) {
-        console.log("Item", item, "checked for existing quantity");
-        return 0;
-      }
-
       function analyticsEngagement(e) { console.log("Engagement data:", e); }
       function analyticsItemClick(e)  { console.log("Item click data:", e); }
       function analyticsItemView(e)   { console.log("Item view data:", e); }
@@ -197,30 +169,6 @@
             accessToken: _at,
             merchantId: _mid,
             merchantNameIdentifier: _mni,
-            analyticsDelegate: {
-              onEngagement: analyticsEngagement,
-              onItemClick: analyticsItemClick,
-              onItemView: analyticsItemView,
-              onOpen: analyticsOpen,
-              onFlyerView: analyticsFlyerView,
-            },
-            cartDelegate: {
-              getCartOptions: getMerchantCartOptions,
-              addToCart: addToMerchantCart,
-              getCurrentQuantity: getCurrentQuantityLogger,
-            },
-            itemDetailsDelegate: {
-              getCustomElements: getCustomElements,
-            },
-          });
-
-          storefront.setDelegate("cartDelegate", {
-            getCartOptions: getMerchantCartOptions,
-            addToCart: addToMerchantCart,
-          });
-
-          storefront.setDelegate("itemDetailsDelegate", {
-            getCustomElements: getCustomElements,
           });
 
           storefront.renderStorefront(container);
